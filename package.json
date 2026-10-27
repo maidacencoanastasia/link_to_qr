@@ -1,0 +1,18 @@
+{
+  "name": "link-to-qr",
+  "version": "1.0.0",
+  "description": "Modern, elegant QR Code generator with real-time preview, custom gradients, logos, and high-res exports",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "jsqr": "^1.4.0",
+    "qr-code-styling": "^1.6.0-rc.1"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
+}
