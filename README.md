@@ -2,7 +2,7 @@
 
 An elegant, high-performance web application to generate, customize, and scan QR codes in real-time.
 
-![Preview](dist/index.html)
+![Preview](public/og-image.png)
 
 ## ✨ Features
 
