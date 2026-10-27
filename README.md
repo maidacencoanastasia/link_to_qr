@@ -41,3 +41,41 @@ npm run dev
 ```
 
 Open your browser at `http://localhost:5173`.
+
+## 🐳 Docker Deployment
+
+You can containerize and run the application using Docker or Docker Compose.
+
+### Option 1: Docker Compose (Recommended)
+
+Start the container in detached mode:
+```bash
+docker compose up -d
+```
+Access the application at **`http://localhost:8080`**.
+
+To stop the container:
+```bash
+docker compose down
+```
+
+### Option 2: Docker CLI
+
+1. **Build the Docker image**:
+   ```bash
+   docker build -t qr-studio .
+   ```
+
+2. **Run the container**:
+   ```bash
+   docker run -d -p 8080:80 --name qr-studio qr-studio
+   ```
+
+3. **Access**:
+   Open **`http://localhost:8080`** in your browser.
+
+4. **Stop and remove container**:
+   ```bash
+   docker stop qr-studio && docker rm qr-studio
+   ```
+

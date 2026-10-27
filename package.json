@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docker:build": "docker build -t qr-studio .",
+    "docker:run": "docker run -d -p 8080:80 --name qr-studio qr-studio",
+    "docker:compose": "docker compose up -d"
   },
   "dependencies": {
     "jsqr": "^1.4.0",
