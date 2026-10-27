@@ -2,9 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>QR Studio — Premium QR Code Generator & Scanner</title>
   <meta name="description" content="Generate high-resolution, custom styled QR codes with gradients, logos, and multiple formats instantly. Scan and decode QR codes directly in your browser.">
+  
+  <!-- Open Graph / Facebook / WhatsApp / Telegram / Messenger -->
+  <meta property="og:site_name" content="QR Studio">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QR Studio — Premium QR Code Generator & Scanner">
+  <meta property="og:description" content="Generate high-resolution, custom styled QR codes with gradients, logos, and multiple formats instantly. Scan and decode QR codes directly in your browser.">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="QR Studio — Premium QR Code Generator & Scanner">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QR Studio — Premium QR Code Generator & Scanner">
+  <meta name="twitter:description" content="Generate high-resolution, custom styled QR codes with gradients, logos, and multiple formats instantly. Scan and decode QR codes directly in your browser.">
+  <meta name="twitter:image" content="/og-image.png">
+
+  <!-- Mobile Browser & Web App Settings -->
+  <meta name="theme-color" content="#07090e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="QR Studio">
+  
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="alternate icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.svg">
@@ -62,7 +86,7 @@
     <div id="generatorView" class="view-panel active">
       <div class="workspace-grid">
         <!-- LEFT COLUMN: CONTROLS -->
-        <section class="config-column">
+        <section class="config-column" id="configColumn">
           <!-- Content Type Selector -->
           <div class="card glass-card">
             <div class="card-header">
@@ -452,7 +476,7 @@
         </section>
 
         <!-- RIGHT COLUMN: LIVE PREVIEW & EXPORT DOCK -->
-        <section class="preview-column">
+        <section class="preview-column" id="previewColumn">
           <div class="card glass-card preview-card">
             <div class="preview-header">
               <div class="status-indicator">
@@ -595,6 +619,18 @@
     </div>
   </aside>
   <div class="history-backdrop" id="historyBackdrop"></div>
+
+  <!-- MOBILE FLOATING ACTION DOCK -->
+  <aside class="mobile-bottom-dock" id="mobileBottomDock">
+    <button type="button" class="dock-btn" id="dockJumpPreviewBtn">
+      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><path d="M14 17h6m-3-3v6"/></svg>
+      <span id="dockJumpText">View QR Code</span>
+    </button>
+    <button type="button" class="dock-btn primary" id="dockQuickDownloadBtn">
+      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span>Download</span>
+    </button>
+  </aside>
 
   <!-- TOAST NOTIFICATION SYSTEM -->
   <div class="toast-container" id="toastContainer"></div>

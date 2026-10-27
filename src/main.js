@@ -580,6 +580,8 @@ function setupEvents() {
     navScan.classList.remove('active');
     generatorView.classList.add('active');
     scanView.classList.remove('active');
+    const dock = document.getElementById('mobileBottomDock');
+    if (dock) dock.style.display = '';
   });
 
   navScan.addEventListener('click', () => {
@@ -587,6 +589,8 @@ function setupEvents() {
     navGenerate.classList.remove('active');
     scanView.classList.add('active');
     generatorView.classList.remove('active');
+    const dock = document.getElementById('mobileBottomDock');
+    if (dock) dock.style.display = 'none';
   });
 
   // History Drawer Toggle
@@ -942,6 +946,34 @@ function setupEvents() {
     requestQrUpdate();
     showToast('Loaded into Generator!', 'success');
   });
+
+  // Mobile Floating Dock Actions
+  const dockJumpPreviewBtn = document.getElementById('dockJumpPreviewBtn');
+  const dockJumpText = document.getElementById('dockJumpText');
+  const dockQuickDownloadBtn = document.getElementById('dockQuickDownloadBtn');
+
+  if (dockJumpPreviewBtn) {
+    dockJumpPreviewBtn.addEventListener('click', () => {
+      const previewCard = document.querySelector('.preview-card');
+      const configCard = document.querySelector('.config-column');
+      if (!previewCard || !configCard) return;
+
+      const previewRect = previewCard.getBoundingClientRect();
+      if (Math.abs(previewRect.top) < 220) {
+        configCard.scrollIntoView({ behavior: 'smooth' });
+        if (dockJumpText) dockJumpText.textContent = 'View QR Code';
+      } else {
+        previewCard.scrollIntoView({ behavior: 'smooth' });
+        if (dockJumpText) dockJumpText.textContent = 'Edit Controls';
+      }
+    });
+  }
+
+  if (dockQuickDownloadBtn) {
+    dockQuickDownloadBtn.addEventListener('click', () => {
+      exportQRCode('png');
+    });
+  }
 }
 
 // Initial Run
