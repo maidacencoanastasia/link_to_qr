@@ -14,6 +14,7 @@ RUN npm ci
 # Copy project source files
 COPY index.html ./
 COPY style.css ./
+COPY public/ ./public/
 COPY src/ ./src/
 
 # Build production bundle (outputs to /app/dist)
