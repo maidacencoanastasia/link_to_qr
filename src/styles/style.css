@@ -263,15 +263,30 @@ html, body {
 
 .workspace-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 2rem;
+  grid-template-columns: minmax(0, 1.35fr) minmax(330px, 440px);
+  grid-template-areas:
+    "input    preview"
+    "custom   preview";
+  gap: 1.75rem;
   align-items: start;
 }
 
-@media (max-width: 1024px) {
-  .workspace-grid {
-    grid-template-columns: 1fr;
-  }
+.workspace-grid > * {
+  min-width: 0;
+}
+
+#inputCard {
+  grid-area: input;
+}
+
+#customizerCard {
+  grid-area: custom;
+}
+
+#previewColumn {
+  grid-area: preview;
+  position: sticky;
+  top: 5.5rem;
 }
 
 /* Glass Cards */
@@ -427,7 +442,7 @@ select.custom-select:focus {
 }
 
 textarea {
-  resize: vertical;
+  resize: none;
   min-height: 80px;
 }
 
@@ -944,9 +959,9 @@ input[type="color"]::-webkit-color-swatch {
 .preview-header {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .status-indicator {
@@ -1539,16 +1554,15 @@ input[type="color"]::-webkit-color-swatch {
 /* Responsive Media Queries */
 @media (max-width: 1024px) {
   .workspace-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "input"
+      "preview"
+      "custom";
+    gap: 1.25rem;
   }
 
-  .config-column {
-    order: 2;
-  }
-
-  .preview-column {
-    order: 1;
+  #previewColumn {
     position: static;
   }
 
@@ -1572,7 +1586,7 @@ input[type="color"]::-webkit-color-swatch {
 
 @media (max-width: 768px) {
   .main-container {
-    padding: 1.25rem 1rem 6rem;
+    padding: 1rem 0.85rem 6.5rem;
   }
 
   .glass-card {
@@ -1581,10 +1595,14 @@ input[type="color"]::-webkit-color-swatch {
   }
 
   .preview-card {
-    padding: 1.5rem 1rem;
+    padding: 1.25rem 1rem;
   }
 
-  /* Prevent auto-zooming on focus in iOS Mobile Safari */
+  .preview-header {
+    margin-bottom: 0.85rem;
+  }
+
+  /* Prevent auto-zooming on focus in iOS Safari */
   input[type="text"],
   input[type="url"],
   input[type="email"],
@@ -1598,15 +1616,18 @@ input[type="color"]::-webkit-color-swatch {
 
   .input-with-button input {
     font-size: 16px !important;
-    padding-right: 4.6rem;
+    padding-right: 4.8rem;
   }
 
+  /* Type Pills - Horizontal smooth swipe */
   .type-pills {
+    display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 6px;
     margin-bottom: 1rem;
+    gap: 0.45rem;
     scrollbar-width: none;
   }
 
@@ -1617,7 +1638,8 @@ input[type="color"]::-webkit-color-swatch {
   .pill {
     white-space: nowrap;
     flex-shrink: 0;
-    padding: 0.5rem 0.85rem;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.82rem;
   }
 
   .form-row {
@@ -1625,17 +1647,31 @@ input[type="color"]::-webkit-color-swatch {
     gap: 0;
   }
 
+  /* Accordion Tabs - Horizontal swipe without text wrap */
   .accordion-tabs {
-    scrollbar-width: none;
+    display: flex;
+    gap: 0.35rem;
+    overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 4px;
+    margin-bottom: 1.25rem;
   }
 
   .accordion-tabs::-webkit-scrollbar {
     display: none;
   }
 
+  .accordion-tab {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.82rem;
+  }
+
   .color-picker-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
   }
 
   .color-mode-toggle {
@@ -1654,44 +1690,85 @@ input[type="color"]::-webkit-color-swatch {
     text-align: center;
   }
 
+  /* Action buttons grid on mobile: Download PNG spans full row, secondary in 2 columns */
+  .action-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+
+  .action-buttons-grid #downloadPngBtn {
+    grid-column: span 2;
+    padding: 0.8rem 1rem;
+    font-size: 0.94rem;
+  }
+
+  .action-buttons-grid .btn {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.82rem;
+  }
+
   .scan-card {
-    padding: 1.5rem 1rem;
+    padding: 1.25rem 1rem;
   }
 
   .scanner-dropzone {
-    padding: 2rem 1rem;
+    padding: 1.75rem 1rem;
   }
 }
 
 @media (max-width: 580px) {
   .app-header {
-    padding: 0.65rem 0.85rem;
+    padding: 0.6rem 0.85rem;
   }
 
   .header-container {
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
 
   .brand-title {
-    font-size: 1.1rem;
+    display: none;
   }
 
   .brand-badge {
     display: none;
   }
 
+  .mode-nav {
+    padding: 3px;
+  }
+
   .nav-btn {
-    padding: 0.45rem 0.65rem;
-    font-size: 0.8rem;
+    padding: 0.45rem 0.5rem;
+    font-size: 0.76rem;
     gap: 0.3rem;
+    white-space: nowrap;
+  }
+
+  .nav-btn svg {
+    display: none;
   }
 
   .palette-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
   }
 
-  .action-buttons-grid {
-    grid-template-columns: 1fr;
+  .palette-btn {
+    padding: 0.5rem 0.65rem;
+  }
+
+  .shape-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.45rem;
+  }
+
+  .shape-btn {
+    padding: 0.65rem 0.4rem;
+  }
+
+  .shape-btn span {
+    font-size: 0.74rem;
   }
 
   .history-drawer {
@@ -1701,18 +1778,103 @@ input[type="color"]::-webkit-color-swatch {
   }
 
   .content-preview-strip {
-    margin-top: 1rem;
+    margin-top: 0.85rem;
     padding-top: 0.75rem;
+  }
+
+  /* Responsive QR Canvas Card size for phones */
+  .qr-code-viewport {
+    width: min(250px, 66vw);
+    height: min(250px, 66vw);
+  }
+
+  .qr-glow-aura {
+    width: min(260px, 70vw);
+    height: min(260px, 70vw);
+    filter: blur(22px);
   }
 }
 
 @media (max-width: 380px) {
-  .brand-title {
-    display: none;
+  .main-container {
+    padding: 0.75rem 0.5rem 6.5rem;
   }
-  
+
+  .glass-card {
+    padding: 1rem 0.75rem;
+  }
+
   .shape-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .color-picker-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-buttons-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-buttons-grid #downloadPngBtn {
+    grid-column: span 1;
+  }
 }
 
+
+
+/* Form footer helper */
+.form-footer-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.35rem;
+}
+
+.form-footer-meta .char-count {
+  margin-top: 0;
+}
+
+/* Empty QR Placeholder State */
+.qr-empty-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  padding: 1.25rem;
+  border-radius: 18px;
+  border: 2px dashed #e2e8f0;
+  background: #f8fafc;
+  color: #64748b;
+  gap: 0.5rem;
+  user-select: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.empty-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #eef2ff;
+  color: #6366f1;
+  margin-bottom: 0.25rem;
+}
+
+.empty-hint-text {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1e293b;
+  margin: 0;
+}
+
+.empty-sub-hint {
+  font-size: 0.76rem;
+  color: #94a3b8;
+}

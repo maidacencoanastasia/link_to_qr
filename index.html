@@ -35,7 +35,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./src/styles/style.css">
 </head>
 <body>
   <!-- Ambient background lighting -->
@@ -85,10 +85,8 @@
     <!-- VIEW 1: GENERATOR -->
     <div id="generatorView" class="view-panel active">
       <div class="workspace-grid">
-        <!-- LEFT COLUMN: CONTROLS -->
-        <section class="config-column" id="configColumn">
-          <!-- Content Type Selector -->
-          <div class="card glass-card">
+        <!-- Input Card -->
+        <div class="card glass-card input-card" id="inputCard">
             <div class="card-header">
               <span class="step-num">1</span>
               <div>
@@ -133,18 +131,15 @@
                   <div class="input-icon">
                     <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                   </div>
-                  <input type="url" id="urlInput" placeholder="https://yourwebsite.com" value="https://antigravity.google">
+                  <input type="url" id="urlInput" placeholder="https://yourwebsite.com" maxlength="150">
                   <button type="button" class="action-tag-btn" id="pasteUrlBtn" title="Paste from clipboard">
                     <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                     Paste
                   </button>
                 </div>
-                <div class="quick-presets">
-                  <span class="label-xs">Quick try:</span>
-                  <button type="button" class="chip" data-sample="https://github.com">GitHub</button>
-                  <button type="button" class="chip" data-sample="https://youtube.com">YouTube</button>
-                  <button type="button" class="chip" data-sample="https://wikipedia.org">Wikipedia</button>
-                  <button type="button" class="chip" data-sample="https://google.com">Google</button>
+                <div class="form-footer-meta">
+                  <span class="label-xs">Max 150 characters</span>
+                  <div class="char-count"><span id="urlCharCount">0</span> / 150</div>
                 </div>
               </div>
 
@@ -153,7 +148,7 @@
                 <div class="form-row">
                   <div class="form-group flex-2">
                     <label for="wifiSsid">Network Name (SSID)</label>
-                    <input type="text" id="wifiSsid" placeholder="MyHome_WiFi">
+                    <input type="text" id="wifiSsid" placeholder="MyHome_WiFi" maxlength="150">
                   </div>
                   <div class="form-group flex-1">
                     <label for="wifiEnc">Security</label>
@@ -166,7 +161,7 @@
                 </div>
                 <div class="form-group" id="wifiPassGroup">
                   <label for="wifiPass">Password</label>
-                  <input type="password" id="wifiPass" placeholder="Enter Wi-Fi password">
+                  <input type="password" id="wifiPass" placeholder="Enter Wi-Fi password" maxlength="150">
                 </div>
                 <label class="checkbox-container">
                   <input type="checkbox" id="wifiHidden">
@@ -178,23 +173,26 @@
               <!-- Plain Text Form -->
               <div class="type-form" id="form-text">
                 <label for="textInput">Enter Text Content</label>
-                <textarea id="textInput" rows="3" placeholder="Type or paste any text or note here..."></textarea>
-                <div class="char-count"><span id="textCharCount">0</span> characters</div>
+                <textarea id="textInput" rows="3" placeholder="Type or paste any text or note here..." maxlength="150"></textarea>
+                <div class="form-footer-meta">
+                  <span class="label-xs">Max 150 characters</span>
+                  <div class="char-count"><span id="textCharCount">0</span> / 150</div>
+                </div>
               </div>
 
               <!-- Email Form -->
               <div class="type-form" id="form-email">
                 <div class="form-group">
                   <label for="emailTo">Recipient Email</label>
-                  <input type="email" id="emailTo" placeholder="recipient@example.com">
+                  <input type="email" id="emailTo" placeholder="recipient@example.com" maxlength="150">
                 </div>
                 <div class="form-group">
                   <label for="emailSubject">Subject (Optional)</label>
-                  <input type="text" id="emailSubject" placeholder="Meeting recap / Hello">
+                  <input type="text" id="emailSubject" placeholder="Meeting recap / Hello" maxlength="150">
                 </div>
                 <div class="form-group">
                   <label for="emailBody">Message Body</label>
-                  <textarea id="emailBody" rows="2" placeholder="Write your email body here..."></textarea>
+                  <textarea id="emailBody" rows="2" placeholder="Write your email body here..." maxlength="150"></textarea>
                 </div>
               </div>
 
@@ -203,26 +201,26 @@
                 <div class="form-row">
                   <div class="form-group">
                     <label for="vcardFirstName">First Name</label>
-                    <input type="text" id="vcardFirstName" placeholder="Sarah">
+                    <input type="text" id="vcardFirstName" placeholder="Sarah" maxlength="150">
                   </div>
                   <div class="form-group">
                     <label for="vcardLastName">Last Name</label>
-                    <input type="text" id="vcardLastName" placeholder="Connor">
+                    <input type="text" id="vcardLastName" placeholder="Connor" maxlength="150">
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group">
                     <label for="vcardPhone">Phone</label>
-                    <input type="tel" id="vcardPhone" placeholder="+1 555-0199">
+                    <input type="tel" id="vcardPhone" placeholder="+1 555-0199" maxlength="150">
                   </div>
                   <div class="form-group">
                     <label for="vcardEmail">Email</label>
-                    <input type="email" id="vcardEmail" placeholder="sarah@example.com">
+                    <input type="email" id="vcardEmail" placeholder="sarah@example.com" maxlength="150">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="vcardOrg">Company / Organization</label>
-                  <input type="text" id="vcardOrg" placeholder="Cyberdyne Systems">
+                  <input type="text" id="vcardOrg" placeholder="Cyberdyne Systems" maxlength="150">
                 </div>
               </div>
 
@@ -230,18 +228,18 @@
               <div class="type-form" id="form-phone">
                 <div class="form-group">
                   <label for="phoneNum">Phone Number</label>
-                  <input type="tel" id="phoneNum" placeholder="+1 (555) 000-0000">
+                  <input type="tel" id="phoneNum" placeholder="+1 (555) 000-0000" maxlength="150">
                 </div>
                 <div class="form-group">
                   <label for="smsMessage">SMS Message (Optional)</label>
-                  <input type="text" id="smsMessage" placeholder="Pre-filled text message">
+                  <input type="text" id="smsMessage" placeholder="Pre-filled text message" maxlength="150">
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Customization Accordion -->
-          <div class="card glass-card customizer-card">
+          <div class="card glass-card customizer-card" id="customizerCard">
             <div class="card-header">
               <span class="step-num">2</span>
               <div>
@@ -467,22 +465,18 @@
               <div class="form-group mt-3">
                 <div class="slider-header">
                   <label for="marginSlider">Outer Margin</label>
-                  <span id="marginVal">15px</span>
+                  <span id="marginVal">5px</span>
                 </div>
-                <input type="range" id="marginSlider" min="0" max="40" value="15" class="custom-range">
+                <input type="range" id="marginSlider" min="0" max="40" value="5" class="custom-range">
               </div>
             </div>
           </div>
-        </section>
 
         <!-- RIGHT COLUMN: LIVE PREVIEW & EXPORT DOCK -->
         <section class="preview-column" id="previewColumn">
           <div class="card glass-card preview-card">
             <div class="preview-header">
-              <div class="status-indicator">
-                <span class="dot-live"></span>
-                <span>Live Interactive Preview</span>
-              </div>
+
               <span class="content-tag" id="previewContentTag">URL Link</span>
             </div>
 
@@ -534,7 +528,7 @@
             <!-- Content preview strip -->
             <div class="content-preview-strip">
               <span class="preview-label">Encoded payload:</span>
-              <div class="preview-url-text" id="encodedPayloadPreview">https://antigravity.google</div>
+              <div class="preview-url-text" id="encodedPayloadPreview">Waiting for input...</div>
             </div>
           </div>
         </section>
