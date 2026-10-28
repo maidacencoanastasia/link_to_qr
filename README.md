@@ -42,40 +42,26 @@ npm run dev
 
 Open your browser at `http://localhost:5173`.
 
-## 🐳 Docker Deployment
+### Production Build
 
-You can containerize and run the application using Docker or Docker Compose.
-
-### Option 1: Docker Compose (Recommended)
-
-Start the container in detached mode:
 ```bash
-docker compose up -d
-```
-Access the application at **`http://localhost:8080`**.
+# Build production bundle to /dist
+npm run build
 
-To stop the container:
-```bash
-docker compose down
+# Preview production build locally
+npm run preview
 ```
 
-### Option 2: Docker CLI
+## 🌐 Deployment to GitHub Pages
 
-1. **Build the Docker image**:
+The project includes an automated CI/CD workflow with GitHub Actions (`.github/workflows/deploy.yml`).
+
+### Setup Instructions:
+
+1. Push your changes to GitHub:
    ```bash
-   docker build -t qr-studio .
+   git push origin main
    ```
-
-2. **Run the container**:
-   ```bash
-   docker run -d -p 8080:80 --name qr-studio qr-studio
-   ```
-
-3. **Access**:
-   Open **`http://localhost:8080`** in your browser.
-
-4. **Stop and remove container**:
-   ```bash
-   docker stop qr-studio && docker rm qr-studio
-   ```
-
+2. In your repository on GitHub, go to **Settings** → **Pages**.
+3. Under **Build and deployment** → **Source**, select **GitHub Actions**.
+4. That's it! Any push to `main` (or `dev`), or a manual run from the **Actions** tab, will automatically build and deploy the application to your GitHub Pages URL (`https://<username>.github.io/<repository>/`).
