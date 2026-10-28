@@ -1,6 +1,10 @@
 # QR Studio — Modern QR Code Generator & Scanner
 
+[![Deploy to GitHub Pages](https://github.com/maidacencoanastasia/link_to_qr/actions/workflows/deploy.yml/badge.svg)](https://github.com/maidacencoanastasia/link_to_qr/actions/workflows/deploy.yml)
+
 An elegant, high-performance web application to generate, customize, and scan QR codes in real-time.
+
+🌐 **Live Demo:** [https://maidacencoanastasia.github.io/link_to_qr/](https://maidacencoanastasia.github.io/link_to_qr/)
 
 ![Preview](public/og-image.png)
 
